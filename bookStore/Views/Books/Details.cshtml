@@ -18,7 +18,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Genre.Name)
+            @Html.ActionLink(Model.Genre.Name, "Details", "Genres", new { id = Model.GenreId}, null)
         </dd>
 
         <dt>
