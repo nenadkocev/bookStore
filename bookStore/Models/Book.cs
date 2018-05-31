@@ -9,15 +9,23 @@ namespace bookStore.Models
     public class Book
     {
         public int Id { get; set; }
-        [Display(Name="Име")]
+        public int AuthorId { get; set; }
+        public int GenreId { get; set; }
+
+        [Required]
+        [Display(Name="Наслов")]
         public string Name { get; set; }
+        [Required]
         public string ISBN { get; set; }
+        [Required]
         [Display(Name = "Цена")]
         public decimal Price { get; set; }
+        [Required]
         [Display(Name = "Јазик")]
         public string Language { get; set; }
         public Author Author{ get; set; }
         public Genre Genre{ get; set; }
+        [Required]
         public int Stock { get; set; }
         public Store Store { get; set; }
 
