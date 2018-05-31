@@ -27,6 +27,8 @@ namespace bookStore.Models
         public Genre Genre{ get; set; }
         [Required]
         public int Stock { get; set; }
+        [Required]
+        public string ImageURL { get; set; }
         public Store Store { get; set; }
 
         public Book(){}

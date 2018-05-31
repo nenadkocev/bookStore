@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201805311352327_changed-models.Designer.cs">
       <DependentUpon>201805311352327_changed-models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805311501371_addedAttributeInBookModel.cs" />
+    <Compile Include="Migrations\201805311501371_addedAttributeInBookModel.Designer.cs">
+      <DependentUpon>201805311501371_addedAttributeInBookModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Author.cs" />
@@ -361,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805311352327_changed-models.resx">
       <DependentUpon>201805311352327_changed-models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805311501371_addedAttributeInBookModel.resx">
+      <DependentUpon>201805311501371_addedAttributeInBookModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

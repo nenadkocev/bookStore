@@ -72,3 +72,4 @@ C:\Users\Nenad\source\repos\bookStore\bookStore\obj\Debug\bookStore.pdb
 C:\Users\Nenad\source\repos\bookStore\bookStore\obj\Debug\bookStore.Migrations.Initial.resources
 C:\Users\Nenad\source\repos\bookStore\bookStore\obj\Debug\bookStore.csproj.GenerateResource.Cache
 C:\Users\Nenad\source\repos\bookStore\bookStore\obj\Debug\bookStore.Migrations.changedmodels.resources
+C:\Users\Nenad\source\repos\bookStore\bookStore\obj\Debug\bookStore.Migrations.addedAttributeInBookModel.resources

@@ -28,7 +28,7 @@ namespace bookStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
+            Book book = db.Books.Include(b => b.Author).Include(b => b.Genre).FirstOrDefault(b => b.Id == id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -49,7 +49,7 @@ namespace bookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,AuthorId,GenreId,Name,ISBN,Price,Language,Stock")] Book book)
+        public ActionResult Create([Bind(Include = "Id,AuthorId,GenreId,Name,ISBN,Price,Language,Stock,ImageURL")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace bookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AuthorId,GenreId,Name,ISBN,Price,Language,Stock")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,AuthorId,GenreId,Name,ISBN,Price,Language,Stock,ImageURL")] Book book)
         {
             if (ModelState.IsValid)
             {

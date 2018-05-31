@@ -10,7 +10,7 @@ namespace bookStore.Models
     {
         public int Id { get; set; }
         [Required]
-        [Display(Name="Име")]
+        [Display(Name="Автор")]
         public string Name { get; set; }
         public virtual List<Book> Books { get; set; }
 
