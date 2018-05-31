@@ -1,25 +1,18 @@
 ﻿@model bookStore.Models.Author
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Name;
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Author</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
-</div>
+<h2>Книги од @Model.Name</h2>
+<ul>
+    @foreach(bookStore.Models.Book a in Model.Books)
+    {
+         <li>
+        <a href="/Books/Details/@a.Id">@a.Name</a>
+          </li>
+    }
+</ul>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
