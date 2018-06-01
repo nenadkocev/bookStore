@@ -84,11 +84,11 @@ namespace bookStore.Controllers
             return View(book);
         }
 
+        [Authorize(Roles = Role.Seller)]
         // GET: Books/Create
         public ActionResult Create()
         {
-            //ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name");
-            //ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name");
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name");
             return View();
         }
 
@@ -100,18 +100,12 @@ namespace bookStore.Controllers
             return Json(authors, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult getGenres(string term)
-        {
-            var genres = db.Genres
-                .Where(a => a.Name.ToLower().Contains(term.ToLower()))
-                .Select(a => new { label = a.Name, Id = a.Id });
-            return Json(genres, JsonRequestBehavior.AllowGet);
-        }
 
         // POST: Books/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = Role.Seller)]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,AuthorId,GenreId,Name,ISBN,Price,Language,Stock,ImageURL")] Book book)
         {
@@ -121,11 +115,12 @@ namespace bookStore.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name");
             return View(book);
         }
 
         // GET: Books/Edit/5
+        [Authorize(Roles = Role.Seller)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -146,6 +141,7 @@ namespace bookStore.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = Role.Seller)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,AuthorId,GenreId,Name,ISBN,Price,Language,Stock,ImageURL")] Book book)
         {
@@ -161,6 +157,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Books/Delete/5
+        [Authorize(Roles = Role.Seller)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -176,6 +173,7 @@ namespace bookStore.Controllers
         }
 
         // POST: Books/Delete/5
+        [Authorize(Roles = Role.Seller)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

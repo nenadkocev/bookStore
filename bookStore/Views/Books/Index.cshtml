@@ -9,9 +9,6 @@
 
 <h2>Книги</h2>
 
-<p>
-    @Html.ActionLink("Додади нова книга", "Create")
-</p>
 <table class="ui celled table" id="booksTable">
     <thead>
         <tr>
@@ -80,7 +77,7 @@
                     {
                         data: "ImageURL", name: "ImageURL",
                         render: function (settings, type, album) {
-                            return "<img src='" + album.ImageURL + "' style='max-width:200px;max-height:200px'/>";
+                            return "<img src='" + album.ImageURL + "' style='max-width:120px;max-height:120px'/>";
                         }
                     }
                 ],
@@ -88,7 +85,7 @@
                 "order": [0, "acs"],
                 "processing": "true",
                 "language": {
-                    "processing": "Податоците се лоадираат..."
+                    "processing": "Податоците се лоадираат...",
                 }
             });
         });

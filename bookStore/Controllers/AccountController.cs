@@ -61,6 +61,28 @@ namespace bookStore.Controllers
             return View();
         }
 
+        // GET: /Account/AddUserToRole
+        public ActionResult AddUserToRole()
+        {
+            AddUserToRoleModel model = new AddUserToRoleModel();
+            return View(model);
+        }
+
+        // POST: /Account/AddUserToRole
+        [HttpPost]
+        public ActionResult AddUserToRole(AddUserToRoleModel model)
+        {
+            try
+            {
+                var user = UserManager.FindByEmail(model.userEmail);
+                UserManager.AddToRole(user.Id, model.selectedRole);
+                return RedirectToAction("Index", "Home");
+            }
+            catch(Exception ex)
+            {
+                return View(model);
+            }
+        }
         //
         // POST: /Account/Login
         [HttpPost]
