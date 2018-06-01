@@ -149,3 +149,4 @@ C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.csproj.CoreCompil
 C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.csproj.CopyComplete
 C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.dll
 C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.pdb
+C:\Users\Nenad\source\repos\bookStore\bookStore\bin\System.Linq.Dynamic.dll

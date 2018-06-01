@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using bookStore.Models;
+using System.Linq.Dynamic;
 
 namespace bookStore.Controllers
 {
@@ -17,8 +18,55 @@ namespace bookStore.Controllers
         // GET: Books
         public ActionResult Index()
         {
-            var books = db.Books.Include(b => b.Author).Include(b => b.Genre);
-            return View(books.ToList());
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult getBooks()
+        {
+
+            // Server side parameter
+            int start = Convert.ToInt32(Request["start"]);
+            int length = Convert.ToInt32(Request["length"]);
+            string searchValue = Request["search[value]"];
+            string sortColumnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
+            string sortDirection = Request["order[0][dir]"];
+
+            var books = db.Books.Select(b =>
+            new
+            {
+                Name = b.Name,
+                Author = b.Author.Name,
+                Genre = b.Genre.Name,
+                Price = b.Price,
+                Language = b.Language,
+                ImageURL = b.ImageURL,
+                AuthorId = b.AuthorId,
+                GenreId = b.GenreId,
+                Id = b.Id
+            });
+
+            int totalRows = books.Count();
+
+            //  Filter
+            if (!String.IsNullOrEmpty(searchValue))
+            {
+                books = books
+                    .Where(book =>
+                    book.Name.ToLower().Contains(searchValue.ToLower()) ||
+                    book.Author.ToLower().Contains(searchValue.ToLower()) ||
+                    book.Genre.ToLower().Contains(searchValue.ToLower())
+                    );
+            }
+            int totalRowsAfterFiltering = books.Count();
+            //  Sort
+            sortDirection = sortDirection == "asc" ? "ascending" : "descending";
+            books = books.AsQueryable().OrderBy(sortColumnName + " " + sortDirection);
+
+            // Paging
+            books = books.Skip(start).Take(length);
+
+            return Json(new { data = books, draw = Request["draw"], recordsTotal = totalRows, recordsFiltered = totalRowsAfterFiltering}, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Books/Details/5

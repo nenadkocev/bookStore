@@ -1,68 +1,96 @@
-﻿@model IEnumerable<bookStore.Models.Book>
-
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Книги";
 }
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css" />
+</head>
 
-<h2>Index</h2>
+<h2>Книги</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Додади нова книга", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Genre.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Language)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th>
+<table class="ui celled table" id="booksTable">
+    <thead>
+        <tr>
+            <th>
+                Наслов
+            </th>
+            <th>
+                Автор
+            </th>
+            <th>
+                Жанр
+            </th>
+            <th>
+                Цена
+            </th>
+            <th>
+                Јазик
+            </th>
+            <th>
 
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Name, "Details", "Books", new { id = item.Id}, null)
-        </td>
-        <td>
-            @Html.ActionLink(item.Author.Name, "Details", "Authors", new { id = item.AuthorId}, null)
-        </td>
-        <td>
-            @Html.ActionLink(item.Genre.Name, "Details", "Genres", new { id = item.GenreId }, null)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Language)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            <img src="@item.ImageURL" style="max-width:200px;max-height:200px" />
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
 </table>
+
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#booksTable").DataTable({
+                ajax: {
+                    url: "/Books/getBooks",
+                    type: "POST",
+                    datatype: "json"
+                },
+                columns: [
+                    {
+                        data: "Name", name: "Name",
+                        render: function (settings, type, album) {
+                            return "<a href='/Books/Details/" + album.Id + "'>" + album.Name + "</a>";
+                        }
+                    },
+                    {
+                        data: "Author", name: "Author",
+                        render: function (settings, type, album) {
+                            return "<a href='/Authors/Details/" + album.AuthorId + "'>" + album.Author + "</a>";
+                        }
+                    },
+                    {
+                        data: "Genre", name: "Genre",
+                        render: function (settings, type, album) {
+                            return "<a href='/Genres/Details/" + album.GenreId + "'>" + album.Genre + "</a>";
+                        }
+                    },
+                    {
+                        data: "Price", name: "Price"
+                    },
+                    {
+                        data: "Language", name: "Language"
+                    },
+                    {
+                        data: "ImageURL", name: "ImageURL",
+                        render: function (settings, type, album) {
+                            return "<img src='" + album.ImageURL + "' style='max-width:200px;max-height:200px'/>";
+                        }
+                    }
+                ],
+                serverSide: "true",
+                "order": [0, "acs"],
+                "processing": "true",
+                "language": {
+                    "processing": "Податоците се лоадираат..."
+                }
+            });
+        });
+    </script>
+}

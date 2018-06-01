@@ -12,22 +12,22 @@ namespace bookStore.Models
         public int AuthorId { get; set; }
         public int GenreId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително")]
         [Display(Name="Наслов")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително")]
         public string ISBN { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително")]
         [Display(Name = "Цена")]
         public decimal Price { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително")]
         [Display(Name = "Јазик")]
         public string Language { get; set; }
         public Author Author{ get; set; }
         public Genre Genre{ get; set; }
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително")]
         public int Stock { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Полето е задолжително")]
         public string ImageURL { get; set; }
         public Store Store { get; set; }
 
