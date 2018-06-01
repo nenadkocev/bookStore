@@ -87,9 +87,25 @@ namespace bookStore.Controllers
         // GET: Books/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name");
-            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name");
+            //ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name");
+            //ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name");
             return View();
+        }
+
+        public ActionResult getAuthors(string term)
+        {
+            var authors = db.Authors
+                .Where(a => a.Name.ToLower().Contains(term.ToLower()))
+                .Select(a => new { label = a.Name, Id = a.Id});
+            return Json(authors, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getGenres(string term)
+        {
+            var genres = db.Genres
+                .Where(a => a.Name.ToLower().Contains(term.ToLower()))
+                .Select(a => new { label = a.Name, Id = a.Id });
+            return Json(genres, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Books/Create
@@ -106,8 +122,6 @@ namespace bookStore.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name", book.AuthorId);
-            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name", book.GenreId);
             return View(book);
         }
 
