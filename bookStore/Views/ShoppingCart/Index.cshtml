@@ -1,0 +1,84 @@
+﻿@using bookStore.Models;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table id="myTable">
+    <thead>
+        <tr>
+            <th>Наслов</th>
+            <th>Цена</th>
+            <th>Број</th>
+            <th>Вкупна цена</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Cart cart in (List<Cart>)Session["Cart"])
+        {
+            <tr>
+                <td>@cart.book.Name</td>
+                <td>@cart.book.Price</td>
+                <td>@cart.Quantity</td>
+                <td>@(String.Format("{0:N0}", cart.book.Price * cart.Quantity))</td>
+                <td>
+                    <button data-id="@cart.book.Id" class="btn btn-default js-delete">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+    <tr>
+
+        <td colspan="3">Вкупно сумирана цена:</td>
+        <td>
+            @{
+                List<Cart> tmp = (List<Cart>)Session["Cart"];
+                var total = String.Format("{0:N0}", tmp.Sum(x => x.Quantity * x.book.Price));
+                Session["total"] = total;
+            }
+            @Session["total"] МКД
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">Вкупно производи во кошничка:</td>
+        <td>
+            @{
+                List<Cart> temp = (List<Cart>)Session["Cart"];
+                var proizvodi = temp.Count;
+                Session["vkupno"] = proizvodi;
+            }
+            @Session["vkupno"]
+        </td>
+        @Html.ActionLink("Checkout", "Create", "Orders", null, null)
+    </tr>
+
+</table>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            var table = $('#myTable').DataTable();
+            $("#myTable .js-delete").on("click", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '/ShoppingCart/Delete/' + button.attr("data-id"),
+                            method: "DELETE",
+                            success: function (result) {
+                                table.row(button.parents("tr")).remove().draw();
+                                window.location.reload()
+                                //window.location = "/ShoppingCart";
+                            }
+                        })
+                    }
+                })
+            })
+        })
+    </script>
+}
