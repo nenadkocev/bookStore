@@ -13,6 +13,11 @@ namespace bookStore.Controllers
     public class AuthorsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        public ActionResult Browse(string author)
+        {
+            var authorModel = db.Authors.Include("Books").FirstOrDefault(g => g.Name == author);
+            return View(authorModel);
+        }
 
         // GET: Authors
         public ActionResult Index()
