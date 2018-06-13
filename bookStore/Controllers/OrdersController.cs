@@ -14,6 +14,13 @@ namespace bookStore.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult BasicIndex()
+        {
+            var items = db.Orders.Where(x => x.Email == User.Identity.Name);
+
+            return View(items.ToList());
+        }
+
         // GET: Orders
         public ActionResult Index()
         {
