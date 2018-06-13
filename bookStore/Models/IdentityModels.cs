@@ -35,5 +35,8 @@ namespace bookStore.Models
         public DbSet<Store> Stores { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Cart> Carts { get; set; }
+
+        public System.Data.Entity.DbSet<bookStore.Models.Order> Orders { get; set; }
+        public System.Data.Entity.DbSet<bookStore.Models.OrderDetails> OrderDetails { get; set; }
     }
 }

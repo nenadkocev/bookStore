@@ -209,6 +209,7 @@
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Global.asax.cs">
@@ -230,6 +231,10 @@
     <Compile Include="Migrations\201806122049494_NV1.Designer.cs">
       <DependentUpon>201806122049494_NV1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806131114389_V3.cs" />
+    <Compile Include="Migrations\201806131114389_V3.Designer.cs">
+      <DependentUpon>201806131114389_V3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddUserToRoleModel.cs" />
@@ -239,6 +244,8 @@
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Store.cs" />
@@ -610,6 +617,11 @@
     <Content Include="Views\ShoppingCart\Shop.cshtml" />
     <Content Include="Views\Genres\Browse.cshtml" />
     <Content Include="Views\Authors\Browse.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -638,6 +650,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806122049494_NV1.resx">
       <DependentUpon>201806122049494_NV1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131114389_V3.resx">
+      <DependentUpon>201806131114389_V3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
