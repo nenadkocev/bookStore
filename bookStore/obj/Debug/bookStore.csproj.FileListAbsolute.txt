@@ -140,7 +140,6 @@ C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\Microsoft.AI.DependencyCollector.
 C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\Microsoft.AI.Web.xml
-C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.csprojResolveAssemblyReference.cache
 C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.Migrations.Initial.resources
 C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.Migrations.changedmodels.resources
 C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.Migrations.addedAttributeInBookModel.resources
@@ -150,3 +149,13 @@ C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.csproj.CopyComple
 C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.dll
 C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.pdb
 C:\Users\Nenad\source\repos\bookStore\bookStore\bin\System.Linq.Dynamic.dll
+C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\System.Linq.Dynamic.dll
+C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.Migrations.NV1.resources
+C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\System.Net.Http.Formatting.dll
+C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\System.Web.Http.dll
+C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\System.Web.Http.WebHost.dll
+C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\System.Net.Http.Formatting.xml
+C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\System.Web.Http.xml
+C:\Users\pc\Desktop\IT\bookStore\bookStore\bin\System.Web.Http.WebHost.xml
+C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.csprojResolveAssemblyReference.cache
+C:\Users\pc\Desktop\IT\bookStore\bookStore\obj\Debug\bookStore.Migrations.V3.resources

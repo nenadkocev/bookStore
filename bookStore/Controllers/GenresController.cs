@@ -14,6 +14,12 @@ namespace bookStore.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult Browse(string genre)
+        {
+            var genreModel = db.Genres.Include("Books").FirstOrDefault(g => g.Name == genre);
+            return View(genreModel);
+        }
+
         // GET: Genres
         public ActionResult Index()
         {

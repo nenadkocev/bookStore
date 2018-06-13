@@ -18,7 +18,7 @@
         </dt>
 
         <dd>
-            @Html.ActionLink(Model.Genre.Name, "Details", "Genres", new { id = Model.GenreId}, null)
+            @Html.ActionLink(Model.Genre.Name, "Details", "Genres", new { id = Model.GenreId }, null)
         </dd>
 
         <dt>
@@ -57,5 +57,26 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") |<button data-id="@Model.Id" class="btn btn-link js-add">Add to cart</button>
 </p>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.js-add').on("click", function () {
+                var button = $(this);
+                bootbox.confirm("Dodaj vo kosnicka?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/ShoppingCart/OrderNow/" + button.attr("data-id"),
+                            method: "POST",
+                            success: function (result) {
+                                window.location.reload()
+                            }
+                        })
+                    }
+                })
+            })
+        })
+    </script>
+}

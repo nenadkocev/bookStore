@@ -26,6 +26,11 @@
                     <li>@Html.ActionLink("Автори", "Index", "Authors")</li>
                     <li>@Html.ActionLink("Жанрови", "Index", "Genres")</li>
                     <li>@Html.ActionLink("Издавачи", "Index", "Stores")</li>
+                    <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
+                    <li>@Html.Action("Shop", "ShoppingCart")</li>
+                    @*Admin visible orders !^*@
+                    <li>@Html.ActionLink("All Orders", "Index", "Orders")</li>
+                    <li>@Html.ActionLink("My orders", "BasicIndex", "Orders")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
