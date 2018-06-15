@@ -55,10 +55,10 @@ namespace bookStore.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Лозинка")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Запомни ме?")]
         public bool RememberMe { get; set; }
     }
 
@@ -69,15 +69,39 @@ namespace bookStore.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Display(Name = "Адреса")]
+        public string Address { get; set; }
+
+        [Display(Name = "Поштенски број")]
+        public string PostalCode { get; set; }
+
+        [Display(Name = "Име")]
+        public string Name { get; set; }
+
+        [Display(Name = "Презиме")]
+        public string Surname { get; set; }
+        
+        [Display(Name = "Град")]
+        public string City { get; set; }
+
+        [Display(Name = "Телефонски број")]
+        public string PhoneNumber { get; set; }
+
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Корисничко име")]
+        [StringLength(50)]
+        [MinLength(3, ErrorMessage = "Корисничкото име мора да е минимум 3 карактери")]
+        public string UserName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = " {0} мора да биде најмалку {2} карактери.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Лозинка")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Потврди лозинка")]
+        [Compare("Password", ErrorMessage = "Лозинката и потврдата за лозинка не се совпаѓаат.")]
         public string ConfirmPassword { get; set; }
     }
 

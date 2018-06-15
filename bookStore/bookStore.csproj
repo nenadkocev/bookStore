@@ -235,6 +235,14 @@
     <Compile Include="Migrations\201806131114389_V3.Designer.cs">
       <DependentUpon>201806131114389_V3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806151309123_added more user attrs.cs" />
+    <Compile Include="Migrations\201806151309123_added more user attrs.Designer.cs">
+      <DependentUpon>201806151309123_added more user attrs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806151311511_added more attrs.cs" />
+    <Compile Include="Migrations\201806151311511_added more attrs.Designer.cs">
+      <DependentUpon>201806151311511_added more attrs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddUserToRoleModel.cs" />
@@ -654,6 +662,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806131114389_V3.resx">
       <DependentUpon>201806131114389_V3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806151309123_added more user attrs.resx">
+      <DependentUpon>201806151309123_added more user attrs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806151311511_added more attrs.resx">
+      <DependentUpon>201806151311511_added more attrs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
