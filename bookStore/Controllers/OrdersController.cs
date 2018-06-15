@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using bookStore.Models;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace bookStore.Controllers
 {
@@ -46,7 +47,20 @@ namespace bookStore.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            Order model = new Order();
+            string userName = User.Identity.Name;
+            var user = db.Users.FirstOrDefault(u => u.UserName == userName);
+            model.Address = user.Address != null ? user.Address : "";
+            model.City = user.City != null ? user.City : "";
+            model.Country = "Македонија";
+            model.Email = user.Email != null ? user.Email : "";
+            model.FirstName = user.Name != null ? user.Name : "";
+            model.LastName = user.Surname != null ? user.Name : "";
+            model.PostalCode = user.PostalCode != null ? user.PostalCode : "";
+            model.State = "Македонија";
+            model.Username = user.UserName;
+            model.Phone = user.PhoneNumber != null ? user.PhoneNumber : "";
+            return View(model);
         }
 
         // POST: Orders/Create

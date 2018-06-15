@@ -1,17 +1,16 @@
 ﻿@model bookStore.Models.Order
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Креирај нарачка";
 }
 
-<h2>Create</h2>
+<h2>Креирај нарачка</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Order</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -120,12 +119,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Креирај нарачка" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Врати се на листата од продукти", "Index")
 </div>

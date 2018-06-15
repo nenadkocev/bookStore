@@ -1,10 +1,10 @@
 ﻿@using bookStore.Models;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Кошничка";
 }
 
-<h2>Index</h2>
+<h2>Кошничка</h2>
 <table id="myTable">
     <thead>
         <tr>
@@ -53,10 +53,10 @@
             }
             @Session["vkupno"]
         </td>
-        @Html.ActionLink("Checkout", "Create", "Orders", null, null)
     </tr>
 
 </table>
+@Html.ActionLink("Продолжи со купување", "Create", "Orders", null, new { @class = "btn btn-default" })
 
 @section scripts{
 

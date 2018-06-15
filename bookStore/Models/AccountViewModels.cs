@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace bookStore.Models
 {
@@ -49,9 +50,9 @@ namespace bookStore.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Корисничко име")]
+        public string UserName { get; set; }
+
 
         [Required]
         [DataType(DataType.Password)]
@@ -91,6 +92,7 @@ namespace bookStore.Models
         [Display(Name = "Корисничко име")]
         [StringLength(50)]
         [MinLength(3, ErrorMessage = "Корисничкото име мора да е минимум 3 карактери")]
+        [Remote("CheckExistingUserName", "Account", HttpMethod = "POST", ErrorMessage = "Корисничкото име е зафатено")]
         public string UserName { get; set; }
 
         [Required]
@@ -101,7 +103,7 @@ namespace bookStore.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Потврди лозинка")]
-        [Compare("Password", ErrorMessage = "Лозинката и потврдата за лозинка не се совпаѓаат.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Лозинката и потврдата за лозинка не се совпаѓаат.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -120,7 +122,7 @@ namespace bookStore.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
