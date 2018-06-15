@@ -62,6 +62,10 @@ namespace bookStore.Controllers
                 order.OrderDate = DateTime.Now;
                 order.Total = Session["total"].ToString();
                 order.Email = User.Identity.Name;
+                Random random = new Random();
+                int i = random.Next();
+                Session["random"] = i;
+                order.OrderKey = i;
                 db.Orders.Add(order);
                 db.SaveChanges();
 
@@ -80,10 +84,15 @@ namespace bookStore.Controllers
                 }
 
                 Session.Remove("Cart");
-                return RedirectToAction("Index");
+                return RedirectToAction("ShipOut");
             }
 
             return View(order);
+        }
+
+        public ActionResult ShipOut()
+        {
+            return View();
         }
 
         // GET: Orders/Edit/5
