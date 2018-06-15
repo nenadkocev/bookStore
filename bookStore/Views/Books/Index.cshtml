@@ -30,7 +30,9 @@
             <th>
 
             </th>
-            <th></th>
+            <th>
+
+            </th>
         </tr>
     </thead>
 
@@ -52,20 +54,20 @@
                 columns: [
                     {
                         data: "Name", name: "Name",
-                        render: function (settings, type, album) {
-                            return "<a href='/Books/Details/" + album.Id + "'>" + album.Name + "</a>";
+                        render: function (settings, type, book) {
+                            return "<a href='/Books/Details/" + book.Id + "'>" + book.Name + "</a>";
                         }
                     },
                     {
                         data: "Author", name: "Author",
-                        render: function (settings, type, album) {
-                            return "<a href='/Authors/Details/" + album.AuthorId + "'>" + album.Author + "</a>";
+                        render: function (settings, type, book) {
+                            return "<a href='/Authors/Details/" + book.AuthorId + "'>" + book.Author + "</a>";
                         }
                     },
                     {
                         data: "Genre", name: "Genre",
-                        render: function (settings, type, album) {
-                            return "<a href='/Genres/Details/" + album.GenreId + "'>" + album.Genre + "</a>";
+                        render: function (settings, type, book) {
+                            return "<a href='/Genres/Details/" + book.GenreId + "'>" + book.Genre + "</a>";
                         }
                     },
                     {
@@ -76,8 +78,13 @@
                     },
                     {
                         data: "ImageURL", name: "ImageURL",
-                        render: function (settings, type, album) {
-                            return "<img src='" + album.ImageURL + "' style='max-width:120px;max-height:120px'/>";
+                        render: function (settings, type, book) {
+                            return "<img src='" + book.ImageURL + "' style='max-width:120px;max-height:120px'/>";
+                        }
+                    },
+                    {
+                        render: function (settings, type, book) {
+                            return "<button data-id='" + book.Id + "' class='btn btn-link js-add'>Add to cart</button>"
                         }
                     }
                 ],
@@ -88,6 +95,17 @@
                     "processing": "Податоците се лоадираат...",
                 }
             });
+            $('body').on("click",'.js-add', function () {
+                var button = $(this);
+                $.ajax({
+                         url: "/ShoppingCart/OrderNow/" + button.attr("data-id"),
+                         method: "POST",
+                         success: function (result) {
+                                window.location.reload()
+                         }
+                      })
+             })
+
         });
     </script>
 }
