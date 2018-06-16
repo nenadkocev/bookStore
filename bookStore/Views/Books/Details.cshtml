@@ -44,7 +44,8 @@
         <dd>
             @Html.DisplayFor(model => model.Language)
         </dd>
-
+        @if (User.IsInRole(bookStore.Models.Role.Seller))
+    {
         <dt>
             @Html.DisplayNameFor(model => model.Stock)
         </dt>
@@ -52,12 +53,28 @@
         <dd>
             @Html.DisplayFor(model => model.Stock)
         </dd>
+}
+        <dt>
+            @Html.DisplayNameFor(model => model.Store.Name)
+        </dt>
+        <dd>
+            @Html.ActionLink(Model.Store.Name, "Details", "Stores", new { id = Model.StoreId }, null)
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index") |<button data-id="@Model.Id" class="btn btn-link js-add">Add to cart</button>
+    @if (User.IsInRole(bookStore.Models.Role.Seller))
+    {
+        @Html.ActionLink("Промени", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+        <br /><br />
+        @Html.ActionLink("Избриши", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })<br /> <br />
+    }
+    else {
+    <button data-id="@Model.Id" class="btn btn-danger js-add">Додади во кошничка</button><br /><br />
+    }
+
+    @Html.ActionLink("Врати се назад", "Index", null, new { @class = "btn btn-default" })
 </p>
 
 @section scripts{

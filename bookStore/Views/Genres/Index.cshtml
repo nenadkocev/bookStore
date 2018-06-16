@@ -4,11 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -17,17 +13,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             <a href="/Genres/Browse?genre=@item.Name">@item.Name</a>
         </td>
+        @if (User.IsInRole("Administrator"))
+    {
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
-    </tr>
 }
 
+    </tr>
+    }
+
 </table>
+
+@if (User.IsInRole("Administrator") || User.IsInRole("Seller"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+    </p>
+}

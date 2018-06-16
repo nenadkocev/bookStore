@@ -4,11 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Автори</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Seller") || User.IsInRole("Administrator"))
+{
+    <p>
+        @Html.ActionLink("Додади нов автор", "Create", null, new { @class = "btn btn-default" })
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -17,17 +21,26 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <a href="/Authors/Browse?author=@item.Name">@item.Name</a>
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="/Authors/Browse?author=@item.Name">@item.Name</a>
+            </td>
+            <td>
+                @if (User.IsInRole("Seller"))
+    {
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-default" })
+if (User.IsInRole("Administrator"))
+{
+                        <br />
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+
 }
+}
+
+            </td>
+        </tr>
+    }
 
 </table>

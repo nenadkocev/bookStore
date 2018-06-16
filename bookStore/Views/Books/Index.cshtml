@@ -95,10 +95,10 @@
                         render: function (settings, type, book) {
                             @if (User.IsInRole(bookStore.Models.Role.Seller))
                             {
-                                <text>return "<a href='/Books/Delete/" + book.Id + "' class='btn btn-danger'> Delete </a><br /> <br /> <a href='/Books/Edit/" + book.Id + "' class='btn btn-default'> Edit </a>" </text>
+                                <text>return "<a href='/Books/Delete/" + book.Id + "' class='btn btn-danger'> Избриши </a><br /> <br /> <a href='/Books/Edit/" + book.Id + "' class='btn btn-default'> Промени </a>" </text>
                             }
                             else {
-                                <text>return "<button data-id='" + book.Id + "' class='btn btn-danger js-add'>Add to cart</button>"</text>
+                                <text>return "<button data-id='" + book.Id + "' class='btn btn-danger js-add'>Додади во кошничка</button>"</text>
                             }
                         }
                     }

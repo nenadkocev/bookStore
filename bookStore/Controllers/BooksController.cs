@@ -84,7 +84,7 @@ namespace bookStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Include(b => b.Author).Include(b => b.Genre).FirstOrDefault(b => b.Id == id);
+            Book book = db.Books.Include(b => b.Store).Include(b => b.Author).Include(b => b.Genre).FirstOrDefault(b => b.Id == id);
             if (book == null)
             {
                 return HttpNotFound();

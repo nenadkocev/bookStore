@@ -42,6 +42,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Genres/Create
+        [Authorize(Roles = "Administrator, Seller")]
         public ActionResult Create()
         {
             return View();
@@ -52,6 +53,7 @@ namespace bookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Seller")]
         public ActionResult Create([Bind(Include = "Id,Name")] Genre genre)
         {
             if (ModelState.IsValid)
@@ -65,6 +67,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Genres/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,6 +87,7 @@ namespace bookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Name")] Genre genre)
         {
             if (ModelState.IsValid)
@@ -96,6 +100,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Genres/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,6 +118,7 @@ namespace bookStore.Controllers
         // POST: Genres/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Genre genre = db.Genres.Find(id);

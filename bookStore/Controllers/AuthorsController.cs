@@ -41,6 +41,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Authors/Create
+        [Authorize(Roles = "Administrator, Seller")]
         public ActionResult Create()
         {
             return View();
@@ -50,6 +51,7 @@ namespace bookStore.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Administrator, Seller")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Author author)
         {
@@ -63,6 +65,7 @@ namespace bookStore.Controllers
             return View(author);
         }
 
+        [Authorize(Roles = Role.Administrator)]
         // GET: Authors/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -83,6 +86,7 @@ namespace bookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Administrator)]
         public ActionResult Edit([Bind(Include = "Id,Name")] Author author)
         {
             if (ModelState.IsValid)
@@ -95,6 +99,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Authors/Delete/5
+        [Authorize(Roles = Role.Administrator)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,6 +115,7 @@ namespace bookStore.Controllers
         }
 
         // POST: Authors/Delete/5
+        [Authorize(Roles = Role.Administrator)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

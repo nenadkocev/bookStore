@@ -10,10 +10,13 @@ namespace bookStore.Models
     {
         public int Id { get; set; }
         [Required]
+        [Display(Name ="Издавачка куќа")]
         public string Name { get; set; }
         [Required]
+        [Display(Name = "Адреса")]
         public string Address { get; set; }
         [Required]
+        [Display(Name = "Телефонски број")]
         public string TelephoneNumber { get; set; }
         [EmailAddress(ErrorMessage = "Невалидна е-маил адреса")]
         public string Email { get; set; }

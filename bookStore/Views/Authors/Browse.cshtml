@@ -1,10 +1,10 @@
 ﻿@model bookStore.Models.Author
 
 @{
-    ViewBag.Title = "Browse";
+    ViewBag.Title = Model.Name;
 }
 
-<h2>Browsing author: @Model.Name</h2>
+<h2>Книѓи од авторот: @Model.Name</h2>
 
 <ul>
     @foreach (var book in Model.Books)
