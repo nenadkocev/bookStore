@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Bookstore", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -29,8 +29,14 @@
                     <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
                     <li>@Html.Action("Shop", "ShoppingCart")</li>
                     @*Admin visible orders !^*@
+                    @if (User.IsInRole(bookStore.Models.Role.Administrator))
+                    {
                     <li>@Html.ActionLink("All Orders", "Index", "Orders")</li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
                     <li>@Html.ActionLink("My orders", "BasicIndex", "Orders")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

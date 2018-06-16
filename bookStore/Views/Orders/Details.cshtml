@@ -117,8 +117,11 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole(bookStore.Models.Role.Administrator))
+    {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }, new { @class = "btn btn-danger"}) 
+    }
+    @Html.ActionLink("Назад во мои нарачки", "Index", null, new { @class ="btn btn-danger"})
 </p>
 
 <table>

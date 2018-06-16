@@ -57,7 +57,7 @@ namespace bookStore.Controllers
             Order order = db.Orders.Find(id);
             if(order == null)
             {
-                return View("Error");
+                return new HttpUnauthorizedResult();
             }
 
             if (order.Email == User.Identity.Name)
@@ -70,7 +70,7 @@ namespace bookStore.Controllers
             }
             else
             {
-                return View("Error");
+                return new HttpUnauthorizedResult();
             }
         }
 
@@ -78,6 +78,12 @@ namespace bookStore.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            List<Cart> tmp = (List<Cart>)Session["Cart"];
+            if(tmp == null || tmp.Count == 0)
+            {
+                return RedirectToAction("Error");
+            }
+
             Order model = new Order();
             string userName = User.Identity.Name;
             var user = db.Users.FirstOrDefault(u => u.UserName == userName);
@@ -86,7 +92,7 @@ namespace bookStore.Controllers
             model.Country = "Македонија";
             model.Email = user.Email != null ? user.Email : "";
             model.FirstName = user.Name != null ? user.Name : "";
-            model.LastName = user.Surname != null ? user.Name : "";
+            model.LastName = user.Surname != null ? user.Surname : "";
             model.PostalCode = user.PostalCode != null ? user.PostalCode : "";
             model.State = "Македонија";
             model.Username = user.UserName;
@@ -103,10 +109,13 @@ namespace bookStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                //string userName = User.Identity.Name;
+                //var user = db.Users.FirstOrDefault(u => u.UserName == userName);
                 List<Cart> tmp = (List<Cart>)Session["Cart"];
                 order.OrderDate = DateTime.Now;
                 order.Total = Session["total"].ToString();
-                order.Email = User.Identity.Name;
+                order.Email = User.Identity.Name; //needs fixation
+                order.Username = User.Identity.Name;
                 Random random = new Random();
                 int i = random.Next();
                 Session["random"] = i;
@@ -141,6 +150,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = Role.Administrator)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -172,6 +182,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = Role.Administrator)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -207,3 +218,9 @@ namespace bookStore.Controllers
         }
     }
 }
+
+
+/*
+    admin: martin@admin.com username: kmartin62 password: Password1!
+    store: matica@seller.com username: Матица password: Password1!
+ */
