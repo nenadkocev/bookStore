@@ -8,12 +8,7 @@
 </head>
 
 <h2>Книги</h2>
-@{
-    if (User.IsInRole(bookStore.Models.Role.Seller))
-    {
-        @Html.ActionLink("Додади книга", "Create",null,  new { @class = "btn btn-default" })
-    }
-}
+
 
 <table class="ui celled table" id="booksTable">
     <thead>
@@ -43,6 +38,14 @@
     </thead>
 
 </table>
+
+<br />
+@{
+    if (User.IsInRole(bookStore.Models.Role.Seller))
+    {
+        @Html.ActionLink("Додади книга", "Create", null, new { @class = "btn btn-danger" })
+    }
+}
 
 @section Scripts{
     <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -90,7 +93,13 @@
                     },
                     {
                         render: function (settings, type, book) {
-                            return "<button data-id='" + book.Id + "' class='btn btn-link js-add'>Add to cart</button>"
+                            @if (User.IsInRole(bookStore.Models.Role.Seller))
+                            {
+                                <text>return "<a href='/Books/Delete/" + book.Id + "' class='btn btn-danger'> Delete </a><br /> <br /> <a href='/Books/Edit/" + book.Id + "' class='btn btn-default'> Edit </a>" </text>
+                            }
+                            else {
+                                <text>return "<button data-id='" + book.Id + "' class='btn btn-danger js-add'>Add to cart</button>"</text>
+                            }
                         }
                     }
                 ],

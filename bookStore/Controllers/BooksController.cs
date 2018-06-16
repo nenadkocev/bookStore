@@ -20,7 +20,7 @@ namespace bookStore.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public ActionResult getBooks()
         {
@@ -43,8 +43,16 @@ namespace bookStore.Controllers
                 ImageURL = b.ImageURL,
                 AuthorId = b.AuthorId,
                 GenreId = b.GenreId,
-                Id = b.Id
+                Id = b.Id,
+                StoreId = b.StoreId
             });
+
+            if (User.IsInRole(Role.Seller))
+            {
+                Store store = db.Stores.FirstOrDefault(s => s.Name == User.Identity.Name);
+                int storeId = store.Id;
+                books = books.Where(b => b.StoreId == storeId);
+            }
 
             int totalRows = books.Count();
 
