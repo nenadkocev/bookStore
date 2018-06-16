@@ -18,6 +18,7 @@ namespace bookStore.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -92,6 +93,13 @@ namespace bookStore.Controllers
             try
             {
                 var user = UserManager.FindByEmail(model.userEmail);
+                Store store = new Store();
+                store.Address = user.Address;
+                store.Email = user.Email;
+                store.Name = user.UserName;
+                store.TelephoneNumber = user.PhoneNumber;
+                db.Stores.Add(store);
+                db.SaveChanges();
                 UserManager.AddToRole(user.Id, model.selectedRole);
                 return RedirectToAction("Index", "Home");
             }

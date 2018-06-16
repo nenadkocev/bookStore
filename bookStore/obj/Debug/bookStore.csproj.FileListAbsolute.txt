@@ -245,3 +245,4 @@ C:\Users\Nenad\Desktop\mm\bookStore\bookStore\obj\Debug\bookStore.dll
 C:\Users\Nenad\Desktop\mm\bookStore\bookStore\obj\Debug\bookStore.pdb
 C:\Users\Nenad\Desktop\mm\bookStore\bookStore\obj\Debug\bookStore.Migrations.addedmoreuserattrs.resources
 C:\Users\Nenad\Desktop\mm\bookStore\bookStore\obj\Debug\bookStore.Migrations.addedmoreattrs.resources
+C:\Users\Nenad\Desktop\mm\bookStore\bookStore\obj\Debug\bookStore.Migrations.addedstoreIdtobook.resources

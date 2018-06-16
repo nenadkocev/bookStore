@@ -243,6 +243,10 @@
     <Compile Include="Migrations\201806151311511_added more attrs.Designer.cs">
       <DependentUpon>201806151311511_added more attrs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806152337064_added storeId to book.cs" />
+    <Compile Include="Migrations\201806152337064_added storeId to book.Designer.cs">
+      <DependentUpon>201806152337064_added storeId to book.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddUserToRoleModel.cs" />
@@ -668,6 +672,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806151311511_added more attrs.resx">
       <DependentUpon>201806151311511_added more attrs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806152337064_added storeId to book.resx">
+      <DependentUpon>201806152337064_added storeId to book.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

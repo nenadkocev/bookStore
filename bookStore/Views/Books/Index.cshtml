@@ -8,6 +8,12 @@
 </head>
 
 <h2>Книги</h2>
+@{
+    if (User.IsInRole(bookStore.Models.Role.Seller))
+    {
+        @Html.ActionLink("Додади книга", "Create",null,  new { @class = "btn btn-default" })
+    }
+}
 
 <table class="ui celled table" id="booksTable">
     <thead>
@@ -95,16 +101,16 @@
                     "processing": "Податоците се лоадираат...",
                 }
             });
-            $('body').on("click",'.js-add', function () {
+            $('body').on("click", '.js-add', function () {
                 var button = $(this);
                 $.ajax({
-                         url: "/ShoppingCart/OrderNow/" + button.attr("data-id"),
-                         method: "POST",
-                         success: function (result) {
-                                window.location.reload()
-                         }
-                      })
-             })
+                    url: "/ShoppingCart/OrderNow/" + button.attr("data-id"),
+                    method: "POST",
+                    success: function (result) {
+                        window.location.reload()
+                    }
+                })
+            })
 
         });
     </script>

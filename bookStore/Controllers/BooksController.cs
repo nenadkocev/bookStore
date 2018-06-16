@@ -111,6 +111,9 @@ namespace bookStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                var store = db.Stores.FirstOrDefault(s => s.Name == User.Identity.Name);
+                store.Books.Add(book);
+                book.StoreId = store.Id;
                 db.Books.Add(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -132,6 +135,16 @@ namespace bookStore.Controllers
             {
                 return HttpNotFound();
             }
+            Store store = db.Stores.Find(book.StoreId);
+            if(store == null)
+            {
+                return HttpNotFound();
+            }
+            bool canEdit = store.Books.FirstOrDefault(b => b.Id == book.Id) != null && User.Identity.Name == store.Name;
+            if (!canEdit)
+            {
+                return new HttpUnauthorizedResult();
+            }
             ViewBag.AuthorId = new SelectList(db.Authors, "Id", "Name", book.AuthorId);
             ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name", book.GenreId);
             return View(book);
@@ -143,7 +156,7 @@ namespace bookStore.Controllers
         [HttpPost]
         [Authorize(Roles = Role.Seller)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AuthorId,GenreId,Name,ISBN,Price,Language,Stock,ImageURL")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,StoreId,AuthorId,GenreId,Name,ISBN,Price,Language,Stock,ImageURL")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -168,6 +181,16 @@ namespace bookStore.Controllers
             if (book == null)
             {
                 return HttpNotFound();
+            }
+            Store store = db.Stores.Find(book.StoreId);
+            if (store == null)
+            {
+                return HttpNotFound();
+            }
+            bool canEdit = store.Books.FirstOrDefault(b => b.Id == book.Id) != null && User.Identity.Name == store.Name;
+            if (!canEdit)
+            {
+                return new HttpUnauthorizedResult();
             }
             return View(book);
         }
