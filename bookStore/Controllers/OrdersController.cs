@@ -28,8 +28,12 @@ namespace bookStore.Controllers
             return View(db.Orders.ToList());
         }
 
-        // GET: Orders/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Error()
+        {
+            return View();
+        }
+
+        public ActionResult AdminDetails(int? id)
         {
             if (id == null)
             {
@@ -41,6 +45,33 @@ namespace bookStore.Controllers
                 return HttpNotFound();
             }
             return View(order);
+        }
+
+        // GET: Orders/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = db.Orders.Find(id);
+            if(order == null)
+            {
+                return View("Error");
+            }
+
+            if (order.Email == User.Identity.Name)
+            {
+                if (order == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(order);
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
         // GET: Orders/Create
@@ -76,6 +107,10 @@ namespace bookStore.Controllers
                 order.OrderDate = DateTime.Now;
                 order.Total = Session["total"].ToString();
                 order.Email = User.Identity.Name;
+                Random random = new Random();
+                int i = random.Next();
+                Session["random"] = i;
+                order.OrderKey = i;
                 db.Orders.Add(order);
                 db.SaveChanges();
 
@@ -94,10 +129,15 @@ namespace bookStore.Controllers
                 }
 
                 Session.Remove("Cart");
-                return RedirectToAction("Index");
+                return RedirectToAction("ShipOut");
             }
 
             return View(order);
+        }
+
+        public ActionResult ShipOut()
+        {
+            return View();
         }
 
         // GET: Orders/Edit/5

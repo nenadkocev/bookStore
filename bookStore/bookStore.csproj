@@ -635,6 +635,9 @@
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\BasicIndex.cshtml" />
+    <Content Include="Views\Orders\ShipOut.cshtml" />
+    <Content Include="Views\Orders\AdminDetails.cshtml" />
+    <Content Include="Views\Orders\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
