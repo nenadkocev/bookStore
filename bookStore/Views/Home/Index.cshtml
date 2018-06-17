@@ -1,31 +1,311 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<object>
+@{
+    List<bookStore.Models.Genre> lstGenre = Model.ToList()[0] as List<bookStore.Models.Genre>;
+    List<bookStore.Models.Author> lstAuthor = Model.ToList()[1] as List<bookStore.Models.Author>;
+    List<bookStore.Models.Book> lstBook = Model.ToList()[2] as List<bookStore.Models.Book>;
+    ViewBag.Title = "Дома";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div id="templatemo_container">
+    <div id="templatemo_header" style="background-image: url('../Content/images/templatemo_header_bg.jpg')">
+    </div>
+
+    <div id="templatemo_content">
+        <div id="templatemo_content_left" @*style="width: 210px"*@>
+            <div class="templatemo_content_left_section">
+                <h1>Омилени жанрови</h1>
+                <ul>
+                    @foreach (var item in lstGenre)
+                    {
+                        <li><a href="/Genres/Details/@item.Id">@item.Name</a></li>
+                    }
+                </ul>
+            </div>
+
+            <div class="templatemo_content_left_section">
+                <h1>Омилени автори</h1>
+                <ul>
+                    @foreach (var item in lstAuthor)
+                    {
+                        <li><a href="/Authors/Details/@item.Id">@item.Name</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div id="templatemo_content_right">
+            <div class="templatemo_product_box">
+                <h1>
+                    @lstBook[0].Name
+                    <span>(од @lstBook[0].Author.Name)</span>
+                </h1>
+                <img src="@lstBook[0].ImageURL" alt="image">
+                <div class="product_info">
+                    <h3>@lstBook[0].Price МКД</h3>
+                    <div class="buy_now_button">
+                        <a href="@Url.Action("OrderNow", "ShoppingCart", new { id = lstBook[0].Id})">Кошничка</a>
+                    </div>
+                    <div class="detail_button">
+                        <a href="@Url.Action("Details", "Books", new { id = lstBook[0].Id})">Детали</a>
+                    </div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>
+            <div class="cleaner_with_width">&nbsp;</div>
+
+
+
+            <div class="templatemo_product_box">
+                <h1>
+                    @lstBook[1].Name
+                    <span>(од @lstBook[1].Author.Name)</span>
+                </h1>
+                <img src="@lstBook[1].ImageURL" alt="image">
+                <div class="product_info">
+                    <h3>@lstBook[1].Price МКД</h3>
+                    <div class="buy_now_button">
+                        <a href="@Url.Action("OrderNow", "ShoppingCart", new { id = lstBook[1].Id})">Кошничка</a>
+                    </div>
+                    <div class="detail_button">
+                        <a href="@Url.Action("Details", "Books", new { id = lstBook[1].Id})">Детали</a>
+                    </div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>
+            <div class="cleaner_with_width">&nbsp;</div>
+
+
+            <div class="templatemo_product_box">
+                <h1>
+       
+                    @lstBook[2].Name
+                    <span>(од @lstBook[2].Author.Name)</span>
+                </h1>
+                <img src="@lstBook[2].ImageURL" alt="image">
+                <div class="product_info">
+                    <h3>@lstBook[2].Price МКД</h3>
+                    <div class="buy_now_button">
+                        <a href="@Url.Action("OrderNow", "ShoppingCart", new { id = lstBook[2].Id})">Кошничка</a>
+                    </div>
+                    <div class="detail_button">
+                        <a href="@Url.Action("Details", "Books", new { id = lstBook[2].Id})">Детали</a>
+                    </div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>
+            <div class="cleaner_with_width">&nbsp;</div>
+
+
+            <div class="templatemo_product_box">
+                <h1>
+                    @lstBook[3].Name
+                    <span>(од @lstBook[3].Author.Name)</span>
+                </h1>
+                <img src="@lstBook[3].ImageURL" alt="image">
+                <div class="product_info">
+                    <h3>@lstBook[3].Price МКД</h3>
+                    <div class="buy_now_button">
+                        <a href="@Url.Action("OrderNow", "ShoppingCart", new { id = lstBook[3].Id})">Кошничка</a>
+                    </div>
+                    <div class="detail_button">
+                        <a href="@Url.Action("Details", "Books", new { id = lstBook[3].Id})">Детали</a>
+                    </div>
+                </div>
+                <div class="cleaner">&nbsp;</div>
+            </div>
+            <div class="cleaner_with_width">&nbsp;</div>
+        </div>
+    </div>
+
+    <div id="templatemo_footer">
+
+        Copyright © @DateTime.Now.Year
+    </div>
+
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<style>
+
+    #templatemo_container {
+        width: 960px;
+        margin: 0 auto;
+        padding: 0 10px;
+        background: #1c1c1b url(../Content/images/templatemo_bg.jpg) repeat-y;
+    }
+
+    #templatemo_footer {
+        clear: both;
+        width: 952px;
+        padding: 20px 0px 20px 0;
+        text-align: center;
+        border-top: 1px solid #25211e;
+        color: #999;
+        background-color: #111110;
+        margin-left: -2px;
+    }
+
+    .cleaner_with_width {
+        float: left;
+        width: 20px;
+        height: 30px;
+        font-size: 1px;
+    }
+
+    .cleaner {
+        clear: both;
+        width: 100%;
+        height: 1px;
+        font-size: 1px;
+    }
+
+    .detail_button a {
+        clear: both;
+        text-align: center;
+        display: block;
+        width: 100px;
+        padding: 4px 0 5px 0;
+        margin-bottom: 10px;
+        background: url(../Content/images/templatemo_btn_01.jpg) no-repeat;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 137px;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        line-height: 1.5em;
+        font-family: Verdana, Arial, san-serif;
+        font-size: 11px;
+        color: #ffffff;
+        background: #4b4743;
+    }
+
+    .buy_now_button a {
+        margin-left: 139px;
+        margin-top: -158px;
+        clear: both;
+        text-align: center;
+        display: block;
+        width: 100px;
+        padding: 4px 0 5px 0;
+        margin-bottom: 10px;
+        background: url(../Content/images/templatemo_btn_02.jpg) no-repeat;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    #templatemo_content_right h3 {
+        padding: 0;
+        margin: 0 0 20px 0;
+        font-size: 18px;
+        color: #ffffff;
+    }
+
+    .templatemo_product_box .product_info {
+        float: left;
+        width: 180px;
+    }
+
+    div {
+        display: block;
+    }
+
+    .templatemo_product_box img {
+        float: left;
+        margin-right: 20px;
+    }
+
+    img {
+        margin-top: -14px;
+        padding: 2px;
+        margin-left: 8px;
+        border: none;
+        max-width: 165px;
+        max-height: 145px;
+    }
+
+    .templatemo_product_box h1 span {
+        font-weight: normal;
+    }
+
+    #templatemo_content_right h1 {
+        padding: 10px;
+        margin: 0 0 20px 0;
+        font-size: 15px;
+        color: #cbc750;
+        background: url(../Content/images/templatemo_h1_bg.jpg);
+    }
+
+    #templatemo_content_right .templatemo_product_box {
+        float: left;
+        width: 303px;
+        height: 240px;
+        padding: 10px;
+        border: 1px solid #333;
+        margin-bottom: 15px;
+    }
+
+    #templatemo_content #templatemo_content_right {
+        float: right;
+        width: 670px;
+    }
+
+    .templatemo_content_left_section ul li a {
+        font-weight: normal;
+        text-decoration: none;
+        color: #969547;
+    }
+
+    .templatemo_content_left_section ul li {
+        padding: 0 0 3px 10px;
+        list-style: none;
+    }
+
+    .templatemo_content_left_section ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .templatemo_content_left_section h1 {
+        font-size: 14px;
+        color: #cbc750;
+        padding: 0 0 5px 0;
+        margin: 0 0 10px 0;
+        border-bottom: 1px dotted #cbc750;
+    }
+
+    #templatemo_header {
+        clear: both;
+        width: 951px;
+        height: 285px;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 20px;
+        margin-left: -1px;
+    }
+
+    #templatemo_content {
+        clear: both;
+        width: 920px;
+        padding: 0 20px;
+    }
+
+        #templatemo_content #templatemo_content_left {
+            float: left;
+            width: 188px;
+            padding: 10px;
+            background-color: #171716;
+            border: 1px solid #212120;
+            margin-left: -20px;
+        }
+
+    #templatemo_content_left .templatemo_content_left_section {
+        clear: both;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #2b2b2a;
+        margin-bottom: 20px;
+    }
+</style>
