@@ -192,6 +192,8 @@ namespace bookStore.Controllers
         [Authorize(Roles = Role.Administrator)]
         public ActionResult ProcessFailed(Book o)
         {
+            if (o == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             return View(o);
         }
 
