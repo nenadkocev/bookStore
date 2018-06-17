@@ -23,6 +23,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Orders
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             return View(db.Orders.ToList());
@@ -48,6 +49,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Orders/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -179,6 +181,57 @@ namespace bookStore.Controllers
                 return RedirectToAction("Index");
             }
             return View(order);
+        }
+
+        [Authorize(Roles = Role.Administrator)]
+        public ActionResult ProcessError()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = Role.Administrator)]
+        public ActionResult ProcessFailed(Book o)
+        {
+            return View(o);
+        }
+
+        //GET: Orders/Process/5
+        [Authorize(Roles = Role.Administrator)]
+        public ActionResult Process(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = db.Orders.Find(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            foreach(OrderDetails o in order.orderDetails)
+            {
+                Book book = db.Books.Include(b => b.Store).FirstOrDefault(b => b.Id == o.BookId);
+                if(book == null)
+                {
+                    // probably deleted 
+                    return RedirectToAction("ProcessError");
+                }
+                int stock = book.Stock;
+                if(stock - o.Quantity < 0)
+                {
+                    // cant process the order, return view to tell whick book caused that
+                    return RedirectToAction("ProcessFailed", o.Book);
+                }
+            }
+            foreach(OrderDetails o in order.orderDetails)
+            {
+                Book book = db.Books.Find(o.BookId);
+                book.Stock -= o.Quantity;
+            }
+            db.Orders.Remove(order);
+            db.SaveChanges();
+            //  success
+            return View();
         }
 
         // GET: Orders/Delete/5

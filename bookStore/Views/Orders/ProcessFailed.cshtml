@@ -1,0 +1,9 @@
+﻿@model bookStore.Models.Book
+@{
+    ViewBag.Title = "ProcessFailed";
+}
+
+<h2>ProcessFailed</h2>
+
+<h3>Нарачката е неуспешна. Книгата @Model.Name  ја нема на залиха</h3>
+@Html.ActionLink("Врати се назад", "Index");

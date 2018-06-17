@@ -638,6 +638,9 @@
     <Content Include="Views\Orders\ShipOut.cshtml" />
     <Content Include="Views\Orders\AdminDetails.cshtml" />
     <Content Include="Views\Orders\Error.cshtml" />
+    <Content Include="Views\Orders\ProcessFailed.cshtml" />
+    <Content Include="Views\Orders\ProcessError.cshtml" />
+    <Content Include="Views\Orders\Process.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

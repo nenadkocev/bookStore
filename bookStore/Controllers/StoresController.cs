@@ -36,6 +36,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Stores/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +47,7 @@ namespace bookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,Name,Address,TelephoneNumber,Email")] Store store)
         {
             if (ModelState.IsValid)
@@ -59,6 +61,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Stores/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +81,7 @@ namespace bookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Name,Address,TelephoneNumber,Email")] Store store)
         {
             if (ModelState.IsValid)
@@ -90,6 +94,7 @@ namespace bookStore.Controllers
         }
 
         // GET: Stores/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,9 +112,14 @@ namespace bookStore.Controllers
         // POST: Stores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Store store = db.Stores.Find(id);
+            IEnumerable<Book> books = from book in db.Books
+                        where book.StoreId == id
+                        select book;
+            db.Books.RemoveRange(books);
             db.Stores.Remove(store);
             db.SaveChanges();
             return RedirectToAction("Index");
