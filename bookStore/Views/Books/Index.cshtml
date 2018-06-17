@@ -28,12 +28,17 @@
             <th>
                 Јазик
             </th>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Seller"))
+    {
+        <th>Залиха</th>
+}
             <th>
 
             </th>
             <th>
 
             </th>
+
         </tr>
     </thead>
 
@@ -85,6 +90,13 @@
                     {
                         data: "Language", name: "Language"
                     },
+                    @if(User.IsInRole("Administrator") || User.IsInRole("Seller"))
+                    {
+                        <text>  {
+                                    data: "Stock", name: "Stock"
+                                },
+                        </text>
+                    }
                     {
                         data: "ImageURL", name: "ImageURL",
                         render: function (settings, type, book) {

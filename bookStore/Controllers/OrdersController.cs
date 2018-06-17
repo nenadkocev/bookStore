@@ -34,6 +34,7 @@ namespace bookStore.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult AdminDetails(int? id)
         {
             if (id == null)

@@ -44,7 +44,8 @@ namespace bookStore.Controllers
                 AuthorId = b.AuthorId,
                 GenreId = b.GenreId,
                 Id = b.Id,
-                StoreId = b.StoreId
+                StoreId = b.StoreId,
+                Stock = b.Stock
             });
 
             if (User.IsInRole(Role.Seller))
