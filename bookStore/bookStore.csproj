@@ -424,6 +424,11 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\images\templatemo_bg.jpg" />
+    <Content Include="Content\images\templatemo_btn_01.jpg" />
+    <Content Include="Content\images\templatemo_btn_02.jpg" />
+    <Content Include="Content\images\templatemo_h1_bg.jpg" />
+    <Content Include="Content\images\templatemo_header_bg.jpg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
